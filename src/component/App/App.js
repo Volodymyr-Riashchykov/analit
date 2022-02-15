@@ -7,8 +7,8 @@ import ResultList from "../../ResultList/ResultList";
 import CollapsibleTable from "../TableList/TableList";
 import CandleList from "../CandleList/CandleList";
 
-// const serverURL = 'http://91.210.37.162:4444'
-const serverURL = 'http://localhost:3005';
+const serverURL = 'http://91.210.37.162:4444'
+// const serverURL = 'http://localhost:3005';
 // const serverURL = 'https://analitserver.herokuapp.com'
 
 export default function App() {
