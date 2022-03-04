@@ -4,8 +4,12 @@ import axios from "axios";
 import Modal from "../Modal/Modal"
 import Spinner from "../Spinner/Spinner";
 import ResultList from "../../ResultList/ResultList";
-import CollapsibleTable from "../TableList/TableList";
+// import CollapsibleTable from "../TableList/TableList";
 import CandleList from "../CandleList/CandleList";
+import HighStock from "../Highcharts/Highcharts";
+import DataTables from "../DataGrid/Grids";
+import DataTable from "../DataGrid/DataGrid";
+import s from '../Highcharts/Highcharts.module.css'
 
 const serverURL = 'http://91.210.37.162:7272'
 // const serverURL = 'http://91.210.37.162:4444'
@@ -35,7 +39,7 @@ export default function App() {
   const handleAddContact =async (perem) => {
     try {
       setPer([perem,...per])
-    console.log('per=',per);
+    // console.log('per=',per);
     setIsReq(true)
     const a = await axios.post(serverURL+'/bur',  perem );
     // console.log("a=", a.data);
@@ -46,6 +50,7 @@ export default function App() {
     // console.log("a=", result);
     } catch (error) {
       alert(error);
+      setIsReq(false)
     }
     
   };
@@ -60,7 +65,14 @@ export default function App() {
     // })
     setIsModal(true)
   }
-    const closeModal = () => {setIsModal(false)}
+  const closeModal = () => { setIsModal(false) }
+  
+  const deleteRes = (id) => {
+
+    setResult(state => state.filter((item, i) => i !== id));
+    setPer(state => state.filter((item, i) => i !== id));
+  
+  };
   // const changeFilter = (e) => {
   //   setFilter(e.currentTarget.value);
   // };
@@ -70,22 +82,33 @@ export default function App() {
   //     contact.name.toLowerCase().includes(filter.toLowerCase())
   //   );
   // };
+  // HighStock();
 
     return (
       <div className={style.container}>
         <h1>Analytics</h1>
+        {/* <DataTables /> */}
         {/* <FormPropsTextFields /> */}
-        <CandleList handleAddContact={handleAddContact} />
+        <CandleList handleAddContact={handleAddContact} loading={isReq} />
         {/* <AddContact handleAddContact={handleAddContact} /> */}
         <h2>Result</h2>
         
-        {isReq && (<h4><Spinner /></h4>)}
+        {/* {isReq && (<h4><Spinner /></h4>)} */}
         {result.length > 0 ?
           <>
             {/* <Filtr value={filter} onChange={changeFilter}/> */}
-            {!isReq && <CollapsibleTable
-              result={result}
-              per={per} />}
+            {/* {!isReq && <CollapsibleTable
+              result={result}!isReq &&
+              per={per} />} */}
+            {
+              <>
+              {/* <div id="container" className={s.container}></div> */}
+              <DataTable result={result}
+              per={per}
+              deleteRes={deleteRes} />
+            </>
+            }
+             {/* <HighStock /> */}
             {/* <OutputList result = {result} per={per} /> */}
             {/* <ContactList contacts={result} delet={deleteContact} /> */}
           </>

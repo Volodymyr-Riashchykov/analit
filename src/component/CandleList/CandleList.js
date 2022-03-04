@@ -12,8 +12,12 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import s from './CandleList.module.css'
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
+import Stack from '@mui/material/Stack';
 
-export default function CandleList({ handleAddContact }) {
+
+export default function CandleList({ handleAddContact,loading }) {
        const [flame_s, setFlameS] = useState("0");
     const [flame_e, setFlameE] = useState("20");
     const [candle_s, setCandleS] = useState("0");
@@ -353,9 +357,19 @@ export default function CandleList({ handleAddContact }) {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select> */}
         </Box>
-        <Button variant="contained" type="submit" endIcon={<SendIcon />}>
-        Send
-      </Button>
+        {/* <Button variant="contained" type="submit" endIcon={<SendIcon />}>
+          Send
+        </Button> */}
+        <LoadingButton
+          type="submit"
+          // onClick={handleClick}
+          endIcon={<SendIcon />}
+          loading={loading}
+          loadingPosition="end"
+          variant="contained"
+        >
+          Send
+        </LoadingButton>
 </form>
     </>
   );
