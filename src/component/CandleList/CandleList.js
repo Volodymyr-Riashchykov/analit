@@ -357,10 +357,10 @@ export default function CandleList({ handleAddContact,loading }) {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select> */}
         </Box>
-        {/* <Button variant="contained" type="submit" endIcon={<SendIcon />}>
-          Send
-        </Button> */}
-        <LoadingButton
+        <Button variant="contained" type="submit" endIcon={<SendIcon />}>
+          {!loading? 'Send' : ''}
+        </Button>
+        {/* <LoadingButton
           type="submit"
           // onClick={handleClick}
           endIcon={<SendIcon />}
@@ -369,7 +369,7 @@ export default function CandleList({ handleAddContact,loading }) {
           variant="contained"
         >
           Send
-        </LoadingButton>
+        </LoadingButton> */}
 </form>
     </>
   );
