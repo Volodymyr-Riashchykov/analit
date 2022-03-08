@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
 import Filtr from '../Filter/Filter';
 import HighStock from "../Highcharts/Highcharts";
 import DataSample from './DataSample';
@@ -88,20 +88,19 @@ export default function DataTable({ result, per, deleteRes }) {
         { field: 'loss', headerName: 'LOSS', headerAlign: 'center', width: 130 },
         { field: 'profit', headerName: 'PROFIT', headerAlign: 'center', width: 130 },
         { field: 'roy', headerName: 'ROY', headerAlign: 'center', width: 130 },
-        {
-        field: 'actions',
-        type: 'actions',
-        headerAlign: 'center',
-        width: 80,
-        getActions: (params) => [
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={deleteStr(params.id)}
-          />,
-        
-        ],
-      },
+    //     {
+    //     field: 'actions',
+    //     type: 'actions',
+    //     headerAlign: 'center',
+    //     width: 80,
+    //     getActions: (params) => [
+    //       <GridActionsCellItem
+    //         icon={<DeleteIcon />}
+    //         label="Delete"
+    //         onClick={deleteStr(params.id)}
+    //       />,
+    //     ],
+    //   },
         
     ];
     const columnsd = [
