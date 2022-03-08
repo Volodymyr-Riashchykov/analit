@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
-// import DeleteIcon from '@mui/icons-material/Delete';
+
 import Filtr from '../Filter/Filter';
 import HighStock from "../Highcharts/Highcharts";
 import DataSample from './DataSample';
