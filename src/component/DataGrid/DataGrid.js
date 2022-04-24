@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import Filtr from '../Filter/Filter';
 import HighStock from "../Highcharts/Highcharts";
 import DataSample from './DataSample';
@@ -9,7 +9,12 @@ import s from '../Highcharts/Highcharts.module.css'
 import DataRows from './DataRows';
 import DataCol from './DataCol';
 
+const polog = 'start'
+
 let candle = null;
+let candle_o = null;
+let candle_c = null;
+
 let rowsd = [];
 let rowsv = [];
 let rowstr = [];
@@ -29,20 +34,41 @@ export default function DataTable({ result, per, deleteRes }) {
     // console.log('ult=',result[0]);
     useEffect(() => {
         // 
-        if (!str) {
+        // if (!str) {
             setStr(0);
             // const istr = 0;
             const d = DataSample(per[0], result[0], 0);
             rowsd = d.row;
-            candle = d.candle
-            sub = d.sub
+            candle = d.candle;
+            sub = d.sub;
+            candle_o = d.candle_o;
+            candle_c = d.candle_c;
             const dd = DataCol(result[0], per, 0, fil, vol,trad,tak);
             rowsv = dd.vol_res;
             rowstr = dd.trad_res;
             rowst = dd.tak_res;
-        }
-        // console.log('s1=',str,'');
-    }, []);
+        // }
+        console.log('s4=',str,'');
+    }, [result]);
+
+    // useEffect(() => {
+    //     // 
+    //     if (!str) {
+    //         setStr(0);
+    //         // const istr = 0;
+    //         const d = DataSample(per[0], result[0], 0);
+    //         rowsd = d.row;
+    //         candle = d.candle;
+    //         sub = d.sub;
+    //         candle_o = d.candle_o;
+    //         candle_c = d.candle_c;
+    //         const dd = DataCol(result[0], per, 0, fil, vol,trad,tak);
+    //         rowsv = dd.vol_res;
+    //         rowstr = dd.trad_res;
+    //         rowst = dd.tak_res;
+    //     }
+    //     console.log('s1=',str,'');
+    // }, []);
     useEffect(() => {
         // 
         // if (str) {
@@ -54,7 +80,7 @@ export default function DataTable({ result, per, deleteRes }) {
         rowst = dd.tak_res;
         setTaks(rowst);
         // }
-        // console.log('s1=',vol,'');
+        console.log('s2=',vol,'');
     }, [vol,trad,tak]);
     
     // console.log('result=',result[0],' ',per,' ',str);
@@ -82,47 +108,48 @@ export default function DataTable({ result, per, deleteRes }) {
     [],
   );
     const columns = [
-        { field: 'id', headerName: 'ID', headerAlign: 'center', width: 70 },
-        { field: 'number', headerName: 'NUMBER', headerAlign: 'center', width: 130 },
-        { field: 'win', headerName: 'WIN', headerAlign: 'center', alignItems: "center", width: 130 },
-        { field: 'loss', headerName: 'LOSS', headerAlign: 'center', width: 130 },
-        { field: 'profit', headerName: 'PROFIT', headerAlign: 'center', width: 130 },
-        { field: 'roy', headerName: 'ROY', headerAlign: 'center', width: 130 },
-    //     {
-    //     field: 'actions',
-    //     type: 'actions',
-    //     headerAlign: 'center',
-    //     width: 80,
-    //     getActions: (params) => [
-    //       <GridActionsCellItem
-    //         icon={<DeleteIcon />}
-    //         label="Delete"
-    //         onClick={deleteStr(params.id)}
-    //       />,
-    //     ],
-    //   },
+        { field: 'id', headerName: 'ID', headerAlign: polog, width: 70 },
+        { field: 'number', headerName: 'NUMBER', headerAlign: polog, width: 130 },
+        { field: 'win', headerName: 'WIN', headerAlign: polog, alignItems: "center", width: 130 },
+        { field: 'loss', headerName: 'LOSS', headerAlign: polog, width: 130 },
+        { field: 'profit', headerName: 'PROFIT', headerAlign: polog, width: 130 },
+        { field: 'roy', headerName: 'ROY', headerAlign: polog, width: 130 },
+        {
+        field: 'actions',
+        type: 'actions',
+        headerAlign: 'start',
+        width: 80,
+        getActions: (params) => [
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            onClick={deleteStr(params.id)}
+          />,
+        
+        ],
+      },
         
     ];
     const columnsd = [
         { field: 'id', headerName: 'ID', width: 50 },
-            { field: 'symbol', headerName: 'PAIR', headerAlign: 'center', width: 100 },
-            { field: 'flame', headerName: 'SHADOW', headerAlign: 'center', width: 80 },
-            { field: 'candle', headerName: 'BODY', headerAlign: 'center', width: 80 },
-            { field: 'date', headerName: 'DATA', headerAlign: 'center', width: 140 },
-            { field: 'volume', headerName: 'VOLUME', headerAlign: 'center', width: 100 },
-            { field: 'trade', headerName: 'TRADE', headerAlign: 'center', width: 100 },
-            { field: 'win', headerName: 'WIN', headerAlign: 'center', width: 80 },
-            { field: 'loss', headerName: 'LOSS', headerAlign: 'center', width: 80 },
-            { field: 'full', headerName: 'FULL', headerAlign: 'center', width: 80 },
+            { field: 'symbol', headerName: 'PAIR', headerAlign: polog, width: 100 },
+            { field: 'flame', headerName: 'SHADOW', headerAlign: polog, alignItems: "center", width: 80 },
+            { field: 'candle', headerName: 'BODY', headerAlign: polog, width: 80 },
+            { field: 'date', headerName: 'DATA', headerAlign: polog, width: 140 },
+            { field: 'volume', headerName: 'VOLUME', headerAlign: polog, width: 100 },
+            { field: 'trade', headerName: 'TRADE', headerAlign: polog, width: 100 },
+            { field: 'win', headerName: 'WIN', headerAlign: polog, width: 80 },
+            { field: 'loss', headerName: 'LOSS', headerAlign: polog, width: 80 },
+            { field: 'full', headerName: 'FULL', headerAlign: polog, width: 80 },
     ];
     const columnsv = [
-        { field: 'min', headerName: 'MIN', headerAlign: 'center', width: 100 },
-        { field: 'max', headerName: 'MAX', headerAlign: 'center', width: 100 },
-        { field: 'number', headerName: 'NUMBER', headerAlign: 'center', width: 70 },
-        { field: 'win', headerName: 'WIN', headerAlign: 'center', alignItems: "center", width: 50 },
-        { field: 'loss', headerName: 'LOSS', headerAlign: 'center', width: 50 },
-        { field: 'profit', headerName: 'PROFIT', headerAlign: 'center', width: 130 },
-        { field: 'roy', headerName: 'ROY', headerAlign: 'center', width: 130 },
+        { field: 'min', headerName: 'MIN', headerAlign: polog, width: 100 },
+        { field: 'max', headerName: 'MAX', headerAlign: polog, width: 100 },
+        { field: 'number', headerName: 'NUMBER', headerAlign: polog, width: 70 },
+        { field: 'win', headerName: 'WIN', headerAlign: polog, alignItems: "center", width: 50 },
+        { field: 'loss', headerName: 'LOSS', headerAlign: polog, width: 50 },
+        { field: 'profit', headerName: 'PROFIT', headerAlign: polog, width: 130 },
+        { field: 'roy', headerName: 'ROY', headerAlign: polog, width: 130 },
         
         
     ];
@@ -144,18 +171,21 @@ export default function DataTable({ result, per, deleteRes }) {
         const d = DataSample(per[i], result[i], i);
             rowsd = d.row;
             candle = d.candle
-            sub = d.sub
+            sub = d.sub;
+            candle_o = d.candle_o;
+            candle_c = d.candle_c;
         const dd = DataCol(result[i], per, i, fil, vol,trad,tak);
         rowsv = dd.vol_res;
         rowstr = dd.trad_res;
         rowst = dd.tak_res;
-        // console.log('str',str);
+        console.log('s3=',str);
     }
     // HighStock();
     return (
         <>
             <Filtr onChange={onChange} vol={vol} trad={trad} tak={tak} />
             {(vol !== 0 && vols.length !== 0) && (<div style={{
+                textAlign: 'center',
                 height: 200,
                 width: '100%',
                 backgroundColor: 'rgba(170, 160, 160, 0.8)',
@@ -165,7 +195,8 @@ export default function DataTable({ result, per, deleteRes }) {
                     columns={columnsv}
                     rowHeight={30}
                     direction="row"
-                    alignItems="center"
+                    align="center"
+                    cell--textCenter
                 />
             </div>)}
             {(trad !== 0 && trads.length !== 0) && (<div style={{
@@ -178,7 +209,7 @@ export default function DataTable({ result, per, deleteRes }) {
                     columns={columnsv}
                     rowHeight={30}
                     direction="row"
-                    alignItems="center"
+                    textAlign="center"
                 />
             </div>)}
              {(tak !== 0 && taks.length !== 0) && (<div style={{
@@ -278,7 +309,7 @@ export default function DataTable({ result, per, deleteRes }) {
             {candle ?
                 <>
                     {/* <div id="container" className={s.container}></div> */}
-                    <HighStock candle={candle} sub={sub} />
+                    <HighStock candle={candle} sub={sub} candle_o={candle_o}  candle_c={candle_c} symb={rowsd} str={str} />
                 </>
                 : <h4>Что то пошло не так</h4>}
             

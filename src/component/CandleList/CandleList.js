@@ -7,14 +7,14 @@ import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel'
 import MenuItem from '@mui/material/MenuItem';
-// import Select from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
 import s from './CandleList.module.css'
-// import LoadingButton from '@mui/lab/LoadingButton';
-// import SaveIcon from '@mui/icons-material/Save';
-// import Stack from '@mui/material/Stack';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
+import Stack from '@mui/material/Stack';
 
 
 export default function CandleList({ handleAddContact,loading }) {
@@ -357,11 +357,10 @@ export default function CandleList({ handleAddContact,loading }) {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select> */}
         </Box>
-        
-        <Button variant="contained" type="submit" >
-          {!loading? 'Send' : ''}
-        </Button>
-        {/* <LoadingButton//endIcon={<SendIcon />}
+        {/* <Button variant="contained" type="submit" endIcon={<SendIcon />}>
+          Send
+        </Button> */}
+        <LoadingButton
           type="submit"
           // onClick={handleClick}
           endIcon={<SendIcon />}
@@ -370,7 +369,7 @@ export default function CandleList({ handleAddContact,loading }) {
           variant="contained"
         >
           Send
-        </LoadingButton> */}
+        </LoadingButton>
 </form>
     </>
   );

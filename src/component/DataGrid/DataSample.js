@@ -33,6 +33,8 @@ function DataSample(per,result,istr) {
     // console.log('re=',result);
     
     const candle = [];
+    const candle_o = [];
+    const candle_c = [];
     const sub = [];
     result.map((res, i) => {
         // console.log('=',res);
@@ -59,15 +61,42 @@ function DataSample(per,result,istr) {
             res[3].volume,
             res[3].number_of_trades,
             i,
+            res[3].quote_asset_volume,
+            res[3].taker_buy_base_asset_volume,
+            res[3].taker_buy_quote_asset_volume,
+            ]
+        )
+        candle_o.push(
+            [res[2].open_time,
+            res[2].open_value,
+            res[2].high,
+            res[2].low,
+            res[2].close_value,
+            res[2].volume,
+            res[2].number_of_trades,
+            i,
             res[2].quote_asset_volume,
             res[2].taker_buy_base_asset_volume,
             res[2].taker_buy_quote_asset_volume,
-            ]
-        )
+            ])
+        candle_c.push(
+            [res[3].open_time,
+            res[3].open_value,
+            res[3].high,
+            res[3].low,
+            res[3].close_value,
+            res[3].volume,
+            res[3].number_of_trades,
+            i,
+            res[3].quote_asset_volume,
+            res[3].taker_buy_base_asset_volume,
+            res[3].taker_buy_quote_asset_volume,
+            ])
+            
         sub.push([
             [
             res[2].open_time,
-            i,
+            istr,
             ],
              [
             res[3].open_time,
@@ -79,7 +108,7 @@ function DataSample(per,result,istr) {
     
     
     
-    return {row, candle, sub};
+    return {row, candle, sub, candle_o, candle_c};
 }
 
 module.exports = DataSample;
